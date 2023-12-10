@@ -1,6 +1,7 @@
 package com.example.ucp2.ui.layout
 
 
+import androidx.benchmark.perfetto.Row
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -20,20 +21,18 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.activity5.R
-import com.example.activity5.data.OrderUIState
-import com.example.activity5.ui.komponen.FormatLabelHarga
-
+import com.example.ucp2.R
+import com.example.ucp2.data.SkripsiUIState
 
 
 @Composable
-fun HalamanTiga(
-    orderUIState: OrderUIState,
+fun HalamanDua(
+    skripsiUIState: SkripsiUIState,
     onBackButtonClicked: () -> Unit
 ){
     val items = listOf(
-        Pair(stringResource(R.string.quantity), orderUIState.jumlah),
-        Pair(stringResource(R.string.flavor), orderUIState.rasa)
+        Pair(stringResource(R.string.pembimbing), skripsiUIState.dosen) ,
+        Pair(stringResource(R.string.pembimbing1), skripsiUIState.dosen1)
     )
 
     Column (
@@ -42,20 +41,25 @@ fun HalamanTiga(
             .padding(16.dp),
     ){
 
-        Text(text = stringResource(id = R.string.nama))
-        Text(text = orderUIState.nama)
+        Text(text = stringResource(id = R.string.namamhs))
+        Text(text = skripsiUIState.nama)
         Divider()
         Spacer(modifier = Modifier.padding(16.dp))
 
 
-        Text(text = stringResource(id = R.string.alamat))
-        Text(text = orderUIState.alamat)
+        Text(text = stringResource(id = R.string.nim))
+        Text(text = skripsiUIState.nim)
         Divider()
         Spacer(modifier = Modifier.padding(16.dp))
 
 
-        Text(text = stringResource(id = R.string.notlp))
-        Text(text = orderUIState.tlp)
+        Text(text = stringResource(id = R.string.konsen))
+        Text(text = skripsiUIState.konsentrasi)
+        Divider()
+        Spacer(modifier = Modifier.padding(16.dp))
+
+        Text(text = stringResource(id = R.string.judulskripsi))
+        Text(text = skripsiUIState.judul)
         Divider()
         Spacer(modifier = Modifier.padding(8.dp))
 
@@ -73,36 +77,17 @@ fun HalamanTiga(
                 Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_small)))
             }
 
-            Spacer(modifier = Modifier.height(dimensionResource(R.dimen.padding_small)))
-
-            FormatLabelHarga(
-                subtotal = orderUIState.harga,
-                modifier = Modifier.align(Alignment.End)
-            )
         }
+        Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_small)))
 
+        Row{
 
+            Button(
+                modifier = Modifier.weight(1f),
+                onClick = onBackButtonClicked
 
-        Row (
-            modifier = Modifier
-                .weight(1f, false)
-                .padding(dimensionResource(R.dimen.padding_medium))
-        ){
-            Column (
-                verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_small))
-            ){
-                Button(
-                    modifier = Modifier.fillMaxWidth(),
-                    onClick = { }
-                ) {
-                    Text(stringResource(R.string.send))
-                }
-                OutlinedButton(
-                    modifier = Modifier.fillMaxWidth(),
-                    onClick = onBackButtonClicked
-                ) {
-                    Text(stringResource(R.string.btn_back))
-                }
+            ) {
+                Text(text = stringResource(id = R.string.back))
             }
         }
     }

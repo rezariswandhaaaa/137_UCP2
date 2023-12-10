@@ -5,4 +5,6 @@ data class SkripsiUIState(
     var nim : String = "",
     var konsentrasi : String = "",
     var judul : String = "",
+    val dosen: String = "",
+    val dosen1: String = ""
 )

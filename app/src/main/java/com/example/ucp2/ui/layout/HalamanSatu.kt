@@ -1,4 +1,5 @@
 @file:OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3Api::class,
+    ExperimentalMaterial3Api::class, ExperimentalMaterial3Api::class,
     ExperimentalMaterial3Api::class
 )
 
@@ -34,22 +35,26 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.ucp2.R
+import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
 
 
 @Composable
 fun HalamanSatu(
     pilihanDosen: List<String>,
+    pilihanDosen1: List<String>,
     onSelectionChanged: (String) -> Unit,
+    onSelectionChanged1: (String) -> Unit,
     onSubmitButtonClicked: (MutableList<String>) -> Unit,
 
 ){
-    var namaText by remember { mutableStateOf("") }
+    var namaText by remember  { mutableStateOf("") }
     var nimText by remember { mutableStateOf("") }
     var konsenText by remember { mutableStateOf("") }
-    var skripsiText by remember { mutableStateOf("") }
+    var skripsiText by remember  { mutableStateOf("") }
     var dosenYgDipilih by rememberSaveable { mutableStateOf("") }
+    var dosenYgDipilih1 by rememberSaveable{ mutableStateOf("") }
 
-    var listData : MutableList<String> = mutableListOf(namaText,nimText, konsenText,skripsiText,dosenYgDipilih)
+    var listData : MutableList<String> = mutableListOf(namaText,nimText, konsenText,skripsiText)
 
     Column (
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -84,62 +89,63 @@ fun HalamanSatu(
             label = { Text(text = stringResource(id = R.string.judulskripsi)) }
         )
         Spacer(modifier = Modifier.height(2.dp))
-        Column(
-            modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.SpaceBetween){
-            Text(text = "Dosen Pembimbing 1", fontWeight = FontWeight.Bold)
-            pilihanDosen.forEach { item ->
+        Row (modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween){
+            Column{
+                Text(text = "Dosen Pembimbing 1", fontWeight = FontWeight.Bold)
+                pilihanDosen.forEach { item ->
 
-                Row(
-                    modifier = Modifier.selectable(selected = dosenYgDipilih == item,
-                        onClick = {
-                            dosenYgDipilih = item
-                            onSelectionChanged(item)
-                        }
-                    ),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
+                    Row(
+                        modifier = Modifier.selectable(selected = dosenYgDipilih == item,
+                            onClick = {
+                                dosenYgDipilih = item
+                                onSelectionChanged(item)
+                            }
+                        ),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
 
-                    RadioButton(
-                        selected = dosenYgDipilih == item,
-                        onClick = {
-                            dosenYgDipilih = item
-                            onSelectionChanged(item)
-                        }
-                    )
+                        RadioButton(
+                            selected = dosenYgDipilih == item,
+                            onClick = {
+                                dosenYgDipilih = item
+                                onSelectionChanged(item)
+                            }
+                        )
 
-                    Text(item)
+                        Text(item)
+
+                    }
+                }
+            }
+
+            Column {
+                Text(text = "Dosen Pembimbing 2", fontWeight = FontWeight.Bold)
+                pilihanDosen1.forEach { item ->
+
+                    Row(
+                        modifier = Modifier.selectable(selected = dosenYgDipilih1 == item,
+                            onClick = {
+                                dosenYgDipilih1 = item
+                                onSelectionChanged1(item)
+                            }
+                        ),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+
+                        RadioButton(
+                            selected = dosenYgDipilih1 == item,
+                            onClick = {
+                                dosenYgDipilih1 = item
+                                onSelectionChanged1(item)
+                            }
+                        )
+                        Text(item)
+                    }
 
                 }
             }
-            Text(text = "Dosen Pembimbing 2", fontWeight = FontWeight.Bold)
-            pilihanDosen.forEach { item ->
 
-                Row(
-                    modifier = Modifier.selectable(selected = dosenYgDipilih == item,
-                        onClick = {
-                            dosenYgDipilih = item
-                            onSelectionChanged(item)
-                        }
-                    ),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-
-                    RadioButton(
-                        selected = dosenYgDipilih == item,
-                        onClick = {
-                            dosenYgDipilih = item
-                            onSelectionChanged(item)
-                        }
-                    )
-
-                    Text(item)
-
-                }
-
-            }
         }
-
         Spacer(modifier = Modifier.padding(5.dp))
 
 
@@ -167,7 +173,9 @@ fun HalamanSatuPreview() {
     val flavors = listOf("haris", "reza", "osamah")
     HalamanSatu(
         pilihanDosen = flavors,
+        pilihanDosen1 = flavors,
         onSelectionChanged = {},
+        onSelectionChanged1 ={},
         onSubmitButtonClicked = {}
     )
 }

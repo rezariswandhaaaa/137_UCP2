@@ -12,28 +12,31 @@ class SkripsiViewModel : ViewModel(){
     private val _stateUI = MutableStateFlow(SkripsiUIState())
     val stateUI: StateFlow<SkripsiUIState> = _stateUI.asStateFlow()
 
-    fun setContact(list: MutableList<String>){
+    fun setFomulir(list: MutableList<String>){
         _stateUI.update {
                 stateSaatIni -> stateSaatIni.copy(
             nama = list[0],
             nim = list[1],
             konsentrasi = list[2],
             judul = list [3]
+
         )
         }
     }
 
-
-
     fun setDosen(dosenPilihan: String) {
         _stateUI.update { stateSaatIni ->
-            stateSaatIni.copy(rasa = dosenPilihan)
+            stateSaatIni.copy(dosen = dosenPilihan)
         }
     }
 
-    fun resetOrder(){
-        _stateUI.value = SkripsiUIState()
+    fun setDosen1(dosenPilihan1: String) {
+        _stateUI.update { stateSaatIni ->
+            stateSaatIni.copy(dosen1 = dosenPilihan1)
+        }
     }
+
+
 
 
 }

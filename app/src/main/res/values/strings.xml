@@ -10,4 +10,6 @@
     <string name="back">Back</string>
     <string name="next">Next</string>
     <string name="submit">Submit</string>
+    <string name="pembimbing">Dosen Pembimbing1</string>
+    <string name="pembimbing1">Dosen Pembimbing2</string>
 </resources>
